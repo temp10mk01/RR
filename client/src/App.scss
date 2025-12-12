@@ -1,0 +1,321 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap");
+
+//
+// ───────────────────────────────────────────────
+//  COLOR VARIABLES
+// ───────────────────────────────────────────────
+//
+
+// Blacks
+$black-900: #0d0d0d;
+$black-800: #1a1a1a;
+$black-700: #262626;
+
+// Reds
+$red-primary: #e63946;
+$red-dark: #b8323c;
+$red-soft: #ff6b6b;
+
+// Neutrals
+$text-light: #e6e6e6;
+$text-muted: #b3b3b3;
+$border-color: #333333;
+
+// Highlights
+$gold-accent: #f2c14e;
+
+// Layout
+$page-width: 75%;
+$radius: 15px;
+
+//
+// ───────────────────────────────────────────────
+//  MIXINS
+// ───────────────────────────────────────────────
+//
+
+// Flex center
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Shadow
+@mixin soft-shadow($intensity: 0.15) {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, $intensity);
+}
+
+// Transition
+@mixin smooth($duration: 0.5s) {
+  transition: $duration ease;
+}
+
+// Frosted glass
+@mixin glass($blur: 10px, $opacity: 0.18) {
+  background: rgba(255, 255, 255, $opacity);
+  backdrop-filter: blur($blur);
+}
+
+// Responsive container
+@mixin container {
+  width: $page-width;
+  margin: 0 auto;
+}
+
+//
+// ───────────────────────────────────────────────
+//  GLOBAL RESET
+// ───────────────────────────────────────────────
+//
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: $red-dark;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: $red-dark;
+}
+
+//
+// ───────────────────────────────────────────────
+//  APP WRAPPER
+// ───────────────────────────────────────────────
+//
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  font-family: "Cinzel", sans-serif;
+  color: $black-700;
+  overflow-x: hidden;
+
+  background: linear-gradient(
+    180deg,
+    $red-dark 0%,
+    #cf4a55 30%,
+    #e35a62 60%,
+    #f27578 100%
+  );
+}
+
+//
+// ───────────────────────────────────────────────
+//  NAVIGATION BAR
+// ───────────────────────────────────────────────
+//
+
+.Nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  width: 100vw;
+  height: 7rem;
+  padding: 15px;
+  border-radius: 0 0 12px 12px;
+  background-color: $red-dark;
+  @include soft-shadow();
+
+  @include flex-center;
+  justify-content: space-between;
+
+  #logo {
+    height: 7rem;
+    padding: 15px;
+  }
+}
+
+.Links {
+  display: flex;
+  gap: 25px;
+  padding: 15px;
+
+  .link {
+    text-decoration: none;
+  }
+
+  p {
+    position: relative;
+    color: $black-900;
+    letter-spacing: 2px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    // underline pseudo-element
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 50%;
+      width: 0%;
+      height: 2px;
+      background-color: $gold-accent;
+      transition: width 0.5s ease-in-out;
+    }
+
+    &:hover {
+      color: $gold-accent;
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
+
+//
+// ───────────────────────────────────────────────
+//  PAGE WRAPPER
+// ───────────────────────────────────────────────
+//
+
+.page {
+  @include container;
+}
+
+//
+// ───────────────────────────────────────────────
+//  HOME PAGE
+// ───────────────────────────────────────────────
+//
+
+.Home {
+  @include flex-center;
+  flex-flow: column;
+  text-align: center;
+
+  .home-image-container {
+    position: relative;
+    @include flex-center;
+    flex-flow: column;
+
+    @include container;
+    width: 75%;
+    margin: 15px;
+
+    border-radius: $radius;
+    @include smooth();
+    opacity: 0.7;
+
+    &:hover {
+      transform: scale(1.02);
+      opacity: 1;
+    }
+
+    .home-image-title {
+      @include glass(10px, 0.18);
+      @include flex-center;
+
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      height: 3rem;
+      width: 100%;
+      font-size: 1.5rem;
+      color: $black-900;
+
+      z-index: 5;
+    }
+
+    .home-image {
+      width: 100%;
+      border-radius: $radius;
+      @include smooth();
+    }
+  }
+}
+
+//
+// ───────────────────────────────────────────────
+//  ABOUT PAGE
+// ───────────────────────────────────────────────
+//
+
+.About {
+  @include flex-center;
+}
+.about-content {
+  display: flex;
+  margin: 15px;
+  background-color: $red-dark;
+  padding: 20px;
+  border-radius: calc(20px + #{$radius});
+  .text-section{
+    padding: 10px;
+    h1{
+      font-size: 60px;
+      font-weight: 100;
+      text-align: center;
+    }
+    p{
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 1.1px;
+    }
+  }
+
+  .image-show{
+    img{
+      border-radius: $radius;
+    }
+  }
+}
+
+
+.embla_wrapper {
+  position: relative;
+  width: 100%;
+}
+.embla {
+  overflow: hidden;
+}
+.embla_container {
+  display: flex;
+}
+.embla_slide {
+  flex: 0 0 90%;
+  min-width: 0;
+} 
+.embla_btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.5rem 0.8rem;
+  font-size: 2rem;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.35);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.55);
+  }
+}
+
+.embla_btn_prev {
+  left: 10px;
+}
+
+.embla_btn_next {
+  right: 10px;
+}
