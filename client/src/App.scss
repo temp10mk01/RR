@@ -13,7 +13,7 @@ $black-700: #262626;
 
 // Reds
 $red-primary: #e63946;
-$red-dark: #b8323c;
+$red-dark: #c8333d;
 $red-soft: #ff6b6b;
 
 // Neutrals
@@ -25,7 +25,7 @@ $border-color: #333333;
 $gold-accent: #f2c14e;
 
 // Layout
-$page-width: 75%;
+$page-width: 85%;
 $radius: 15px;
 
 //
@@ -77,14 +77,17 @@ $radius: 15px;
 
 html {
   scroll-behavior: smooth;
+  font-family: "Cinzel", sans-serif;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
 }
+::-webkit-scrollbar-track {
+  background: $border-color;
+}
 ::-webkit-scrollbar-thumb {
   background: $red-dark;
-  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: $red-dark;
@@ -100,7 +103,6 @@ html {
   height: 100vh;
   display: flex;
   flex-flow: column;
-  font-family: "Cinzel", sans-serif;
   color: $black-700;
   overflow-x: hidden;
 
@@ -143,16 +145,22 @@ html {
   display: flex;
   gap: 25px;
   padding: 15px;
+  align-items: center;
 
   .link {
     text-decoration: none;
+  }
+
+  span {
+    font-weight: 900;
+    font-size: 35px;
   }
 
   p {
     position: relative;
     color: $black-900;
     letter-spacing: 2px;
-    font-size: 1.3rem;
+    font-size: 2vmin;
     font-weight: 600;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -175,6 +183,17 @@ html {
       &::after {
         width: 100%;
       }
+    }
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1000px) {
+  .Nav {
+    height: 5rem;
+    #logo {
+      height: 10vh;
     }
   }
 }
@@ -207,7 +226,14 @@ html {
 
     @include container;
     width: 75%;
-    margin: 15px;
+    margin: 30px;
+
+    &:first-child {
+      margin-top: 50px;
+    }
+    &:last-child {
+      margin-bottom: 50px;
+    }
 
     border-radius: $radius;
     @include smooth();
@@ -249,73 +275,213 @@ html {
 //
 
 .About {
-  @include flex-center;
-}
-.about-content {
   display: flex;
-  margin: 15px;
-  background-color: $red-dark;
-  padding: 20px;
-  border-radius: calc(20px + #{$radius});
-  .text-section{
-    padding: 10px;
-    h1{
-      font-size: 60px;
-      font-weight: 100;
-      text-align: center;
-    }
-    p{
-      font-size: 1.6rem;
-      font-weight: 400;
-      letter-spacing: 1.1px;
-    }
+  flex-direction: column;
+  gap: 6rem;
+  padding: 4rem 0;
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: 2px;
   }
 
-  .image-show{
-    img{
-      border-radius: $radius;
-    }
+  p {
+    line-height: 1.6;
+    color: $black-900;
   }
 }
 
+.about-hero {
+  text-align: center;
 
-.embla_wrapper {
-  position: relative;
-  width: 100%;
-}
-.embla {
-  overflow: hidden;
-}
-.embla_container {
-  display: flex;
-}
-.embla_slide {
-  flex: 0 0 90%;
-  min-width: 0;
-} 
-.embla_btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 0.5rem 0.8rem;
-  font-size: 2rem;
-  font-weight: bold;
-  background: rgba(0, 0, 0, 0.35);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.25s ease;
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
 
-  &:hover {
-    background: rgba(0, 0, 0, 0.55);
+  .subtitle {
+    font-size: 1.2rem;
+    color: $black-800;
   }
 }
 
-.embla_btn_prev {
-  left: 10px;
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  &.reverse {
+    direction: rtl;
+
+    .text,
+    .image {
+      direction: ltr;
+    }
+  }
+
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    h2 {
+      font-size: 2rem;
+      color: $black-900;
+    }
+  }
+
+  .image {
+    display: flex;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 15px;
+      opacity: 0.9;
+      transition: 0.4s ease;
+
+      &:hover {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
+  }
 }
 
-.embla_btn_next {
-  right: 10px;
+.about-values {
+  text-align: center;
+
+  h2 {
+    font-size: 2.2rem;
+    margin-bottom: 3rem;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .value-card {
+    padding: 2rem;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    transition: 0.3s ease;
+
+    h3 {
+      margin-bottom: 1rem;
+      color: $black-900;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 900px) {
+  .about-section {
+    grid-template-columns: 1fr;
+    text-align: center;
+
+    .image img {
+      max-width: 100%;
+    }
+  }
+
+  .about-values .values-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+//
+// ───────────────────────────────────────────────
+// CONTACT PAGE
+// ───────────────────────────────────────────────
+//
+
+.Contact {
+  width: 75%;
+  margin: 50px auto;
+  h1 {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .name-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+      }
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      label {
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+      input{
+        font-size: 1.2rem;
+        height: 50px;
+      }
+      textarea{
+        font-size: 1.1rem;
+        height: 150px;
+        width: 100%;
+        resize: vertical;
+      }
+      input,
+      textarea {
+        @include glass(10px, 0.18);
+        @include smooth(0.3s);
+        padding: 5px;
+        border: 2px solid $border-color;
+        &:hover{
+          border-color: rgba($gold-accent, 0.4);
+        }
+        &:focus{
+          outline: none;
+          border-color: $gold-accent;
+        }
+      }
+    }
+  }
+  button {
+    @include glass(10px, 0.25);
+    @include smooth(0.3s);
+
+    width: 120px;
+    height: 50px;
+
+    margin: 20px auto 0 auto;
+
+    font-size: 18px;
+
+    border-radius: 2px;
+    border: 2px solid $border-color;
+
+
+    &:hover{
+      border-color: rgba($gold-accent, 0.4);
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+  }
 }

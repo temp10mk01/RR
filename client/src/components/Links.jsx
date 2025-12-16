@@ -4,9 +4,13 @@ export default function Links(){
     return(
         <div className='Links'>
             <Link className="link" to="/"><p>PAGRINDINIS</p></Link>
-            <Link className="link" to="/about"><p>APIE</p></Link>
+            <span>~</span>
+            <Link className="link" to="/apie"><p>APIE</p></Link>
+            <span>~</span>
+            {/* !CHANGE SEPARATORS! */}
             <Link className="link" to="/galerija"><p>GALERIJA</p></Link>
-            <Link className="link" to="/contact"><p>KONTAKTAI</p></Link>
+            <span>~</span>
+            <Link className="link" to="/kontaktai"><p>KONTAKTAI</p></Link>
         </div>
     )
 }
