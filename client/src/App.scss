@@ -451,8 +451,9 @@ html {
       textarea {
         @include glass(10px, 0.18);
         @include smooth(0.3s);
-        padding: 5px;
-        border: 2px solid $border-color;
+        padding: 10px;
+        border: 1px solid $border-color;
+        border-radius: $radius;
         &:hover{
           border-color: rgba($gold-accent, 0.4);
         }
